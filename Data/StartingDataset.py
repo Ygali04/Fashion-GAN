@@ -32,7 +32,6 @@ def train(dataset, epochs):
     for image_batch in dataset:
       train_step(image_batch)
     
-    # Produce images for the GIF as we go
     display.clear_output(wait=True)
     generate_and_save_images(generator,
                              epoch + 1,
@@ -40,7 +39,6 @@ def train(dataset, epochs):
 
     print ('Time for epoch {} is {} sec'.format(epoch + 1, time.time()-start))
 
-  # Generate after the final epoch
   display.clear_output(wait=True)
   generate_and_save_images(generator,
                            epochs,
@@ -50,8 +48,6 @@ def scale_and_show(img):
   plt.imshow(np.array(img[:,:,0]), cmap = "Greys")
 
 def generate_and_save_images(model, epoch, test_input):
-  # Notice `training` is set to False.
-  # This is so all layers run in inference mode (batchnorm).
   predictions = model(test_input, training=False)
 
   fig = plt.figure(figsize=(4,4))
@@ -64,6 +60,5 @@ def generate_and_save_images(model, epoch, test_input):
   plt.savefig('image_at_epoch_{:04d}.png'.format(epoch))
   plt.show() 
 
-# Display a single image using the epoch number
 def display_image(epoch_no):
   return PIL.Image.open('image_at_epoch_{:04d}.png'.format(epoch_no))
