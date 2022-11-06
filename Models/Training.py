@@ -1,3 +1,5 @@
+from Data import StartingDataset
+
 (train_images, train_labels), (_, _) = tf.keras.datasets.fashion_mnist.load_data()
 show_dataset_examples(train_images)
 print (train_images.shape)
